@@ -22,7 +22,7 @@ Figure 1: illustration of proposed AutoKG architecture [2].
 
 Creating simple knowledge graphs from text using LLMs is trivial [1]. However, producing good knowledge graphs from large text samples proves to be a much more difficult problem, and is still an open problem. Resolving entities to the same objects (such as the Entity alignment problem) is a difficult problem and might increase the difficulty. We are also attempting to use standard ontologies in constructing our knowledge graphs, which increases the difficulty further.
 
-Thus, we rank the difficulty of this project at an 8/10 (pending review).
+Thus, we rank the difficulty of this project at an 9/10.
 
 
 # Relevance

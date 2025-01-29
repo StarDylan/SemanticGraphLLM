@@ -1,17 +1,21 @@
 
 # Features
-> Project attributes that are of interest at the end user level; should be formulated in less technical terms, and more intended for "marketing" purposes.
 
-- Works with any Ontology
-
-- Generates Meaningful Knowledge Graphs from freeform Text
-
-- 
+- Works with any OWL-DL Ontology.
+- Generates Meaningful Knowledge Graphs from natural language that conforms to the ontology.
+- (Stretch goal) Add nodes / relationships into existing KGs.
 
 # Requirements
-> Conversion of features into specifications that can be used as a contract between the software/system developers and the project owners (end users, or whoever would pay for the system).
 
-
+- The system takes as input an ontology in OWL-DL and a text blob encapsulating the facts wanting to be represented in the knowledge graph.
+- The system outputs a knowledge graph in RDF serialized as turtle.
+- The generated knowledge graph should encapsulate all significant facts.
+- The resulting knowledge graph should conform to the ontology specified.
+- (Stretch goal) The knowledge graph should be able to read/write facts in neo4j or other similar graph database.
 
 # Evaluation Criteria
-> Measures that can be applied to the system in order to determine if it meets the requirements or not. Ideally, they should be objective and measurable. Frequently there is a close correlation between requirements and evaluation criteria. 
+
+- Does the generated output conform to turtle syntax?
+- Does the generated knowledge graph conform to the ontology specified?
+- What proportion of facts in the text are captured by the knowledge graph? (compared to facts as evaluated by a human operator)
+- (Stretch Goal) Does the system duplicate data when integrating with an existing knowledge graph?

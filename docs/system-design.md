@@ -29,6 +29,9 @@
                                 +----------------+
 ```
 
+
+## Overview
+
 The system takes as input the natural language text and the ontology that the
 final knowledge graph should conform to. The current plan is to feed natural
 language into a Named Entity Recognition (NER) system, which will (ideally)
@@ -39,3 +42,20 @@ This is then passed to an ontology verifier, which confirms whether it conforms
 to the ontology. If it doesn't conform, it's rejected and the Relation Finder is
 run again with feedback from the verifier. Otherwise, the generated knowledge
 graph is returned to the user.
+
+## System Components
+
+**Natural Language** - The source text that contains knowledge we wish to create
+a Knowledge Graph from.
+
+**Ontology** - The "schema" of the knowledge graph we wish to create.
+
+**Named Entity Recognition** - Finds proper nouns in the text.
+
+**Relation Finder** - Determines the relations between entities in the text
+and ontology.
+
+**Ontology Verifier** - Determines if the generated knowledge graph conforms
+to the ontology.
+
+**Return To User** - Returns the generated knowledge graph.

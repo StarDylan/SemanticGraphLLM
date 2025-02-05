@@ -28,6 +28,3 @@ def example_stream(raw_resume: str) -> list[Triple]:
 
   return final
 
-
-print(example_stream("I am a software engineer"))
-

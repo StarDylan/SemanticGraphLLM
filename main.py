@@ -1,3 +1,9 @@
+from dotenv import load_dotenv
+load_dotenv()
+
+from ner import named_entity_recognition
+
+
 from baml_client.sync_client import b
 
 from baml_client.types import Triple
@@ -28,5 +34,9 @@ def example_stream(raw_resume: str) -> list[Triple]:
 
   return final
 
+with open("bee.txt", "r", errors="ignore") as f:
+    text = f.read()
+ents = named_entity_recognition(text)
+print(ents)
 
 print(example_stream("I am a software engineer"))

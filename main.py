@@ -1,30 +1,24 @@
+import dotenv
+dotenv.load_dotenv()
 from baml_client.sync_client import b
 
 from baml_client.types import Triple
 
-def example(raw_resume: str) -> list[Triple]: 
 
+
+
+def generate_triples(text: str, ontology: str) -> list[Triple]:
   # BAML's internal parser guarantees ExtractResume
 
   # to be always return a Resume type
 
-  response = b.ExtractTriples(raw_resume)
+  response = b.ExtractTriples(text, ontology)
 
   return response
 
-def example_stream(raw_resume: str) -> list[Triple]:
 
-  stream = b.stream.ExtractTriples(raw_resume)
+with open("ontologies/pizza_ontology.owl") as f:
+  ontology = f.read()
 
-#   for msg in stream:
-
-#     print(msg) # This will be a PartialResume type
-
-  
-
-  # This will be a Resume type
-
-  final = stream.get_final_response()
-
-  return final
+print(generate_triples("Pepperoni Pizza has pepperonni toppings and cheese and red sauce", ontology))
 

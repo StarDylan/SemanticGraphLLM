@@ -2,3 +2,4 @@ python-dotenv
 baml-py
 pydantic
 spacy
+owlready2

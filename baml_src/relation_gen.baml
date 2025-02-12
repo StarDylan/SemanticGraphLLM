@@ -1,17 +1,20 @@
 // Defining a raw unit of knowledge.
 class Triple {
-  subject string // Should be as generic as possible
-  predicate string
-  object string @description(#"
-    Should be as generic as possible to allow for linking with
-    other triples.
-  "#)
+  subjectIRI string // Should be as generic as possible
+  predicateIRI string
+  objectIRI string 
 }
 
 // Create a function to extract triples from text.
-function ExtractTriples(text: string) -> Triple[] {
-  client Deepseek
+function ExtractTriples(text: string, ontology_file: string) -> Triple[] {
+  client "openai/gpt-4o-mini"
+
   prompt #"
+    Using this ontology, generate valid triples from the text.
+    
+    Ontology:
+    {{ ontology_file }}
+
     Extract from this content:
     {{ text }}
 
@@ -34,6 +37,7 @@ test wikipedia_bee {
 test john_cena_life {
   functions [ExtractTriples]
   args {
+    ontology_file "wikipedia_ontology"
     text #"
 
     John Felix Anthony Cena was born in West Newbury, Massachusetts, on April 23, 1977, 

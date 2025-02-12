@@ -1,4 +1,4 @@
-name: /home/benja/Code/CSC581/SemanticGraphLLM/.condaenv
+name: condaenv
 channels:
   - defaults
   - conda-forge
@@ -12,7 +12,7 @@ dependencies:
   - bzip2=1.0.8=h4bc722e_7
   - ca-certificates=2025.1.31=hbcca054_0
   - catalogue=2.0.10=py312h7900ff3_1
-  - certifi=2024.12.14=pyhd8ed1ab_0
+  - certifi=2025.1.31=py312h06a4308_0
   - cffi=1.17.1=py312h06ac9bb_0
   - charset-normalizer=3.4.1=pyhd8ed1ab_0
   - click=8.1.8=pyh707e725_0
@@ -56,6 +56,7 @@ dependencies:
   - ncurses=6.5=h2d0b736_3
   - numpy=2.2.2=py312h72c5963_0
   - openssl=3.4.0=h7b32b05_1
+  - owlready2=0.47=py312h66e93f0_0
   - packaging=24.2=pyhd8ed1ab_2
   - pip=25.0=pyh8b19718_0
   - preshed=3.0.9=py312h2ec8cdc_2

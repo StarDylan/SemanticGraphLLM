@@ -10,22 +10,16 @@ from baml_client.types import Triple
 
 
 
-def generate_triples(text: str, ontology: str) -> list[Triple]:
-  # BAML's internal parser guarantees ExtractResume
-
-  # to be always return a Resume type
-
-  response = b.ExtractTriples(text, ontology)
-
-  return response
+def generate_triples(text: str, named_entities: list[str], ontology: str) -> list[Triple]:
+    named_entities_str = ", ".join(named_entities)
+    return b.ExtractTriples(text, named_entities_str, ontology)
 
 
 with open("ontologies/pizza_ontology.owl") as f:
   ontology = f.read()
 
-print(generate_triples("Pepperoni Pizza has pepperonni toppings and cheese and red sauce", ontology))
+source = "Pepperoni Pizza has pepperonni toppings and cheese and red sauce"
+named_entities = named_entity_recognition(source)
 
-with open("data/bee.txt", "r", errors="ignore") as f:
-    text = f.read()
-ents = named_entity_recognition(text)
-print(ents)
+print(generate_triples(source, named_entities, ontology))
+

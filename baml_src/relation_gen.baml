@@ -6,14 +6,17 @@ class Triple {
 }
 
 // Create a function to extract triples from text.
-function ExtractTriples(text: string, ontology_file: string) -> Triple[] {
-  client "openai/gpt-4o-mini"
+function ExtractTriples(text: string, named_entities: string, ontology_file: string) -> Triple[] {
+  client Gemini
 
   prompt #"
-    Using this ontology, generate valid triples from the text.
+    Using this ontology and these entities from the text, generate valid triples from the text.
     
     Ontology:
     {{ ontology_file }}
+
+    Entities:
+    {{ named_entities }}
 
     Extract from this content:
     {{ text }}

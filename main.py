@@ -12,9 +12,9 @@ from pathlib import Path
 import rdflib
 import pandas as pd
 
-def generate_triples(text: str, named_entities: list[str], ontology: str) -> list[Triple]:
+def generate_triples(text: str, named_entities: list[str], ontology_text: str) -> list[Triple]:
     named_entities_str = ", ".join(named_entities)
-    return b.ExtractTriples(text, named_entities_str, ontology)
+    return b.ExtractTriples(text, named_entities_str, ontology_text)
 
 
 def add_triples(triples: list[Triple], graph: rdflib.Graph) -> None:
@@ -23,17 +23,6 @@ def add_triples(triples: list[Triple], graph: rdflib.Graph) -> None:
     subject = rdflib.URIRef(triple.subjectIRI)
     predicate = rdflib.URIRef(triple.predicateIRI)
     obj = rdflib.URIRef(triple.objectIRI)
-
-    # Double check each iri already exists
-    if not graph.value(subject):
-      print(f"WARNING: {subject} does not exist in the ontology")
-
-    if not graph.value(obj):
-      print(f"WARNING: {obj} does not exist in the ontology")
-
-    if not graph.value(predicate):
-      print(f"WARNING: {predicate} does not exist in the ontology")
-
 
     graph.add((subject, predicate, obj))
 
@@ -92,7 +81,7 @@ g.parse(data=ontology_text, format="xml")
 print(f"Loaded {len(g)} triples from the ontology")
 print(g.serialize(format="turtle"))
 
-source = "Pepperoni Pizza has pepperonni toppings and cheese and red sauce"
+source = "Pepperoni Pizza has pepperonni toppings and cheese and red sauce. The 'MegaPizza' contains Cheese Pizza and Pepperoni Pizza as toppings"
 named_entities = named_entity_recognition(source)
 
 triples = generate_triples(source, named_entities, ontology_text)

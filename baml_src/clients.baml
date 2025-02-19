@@ -12,6 +12,13 @@ client<llm> Deepseek {
   }
 }
 
+client<llm> Gemini {
+  provider google-ai
+  options {
+    model "gemini-1.5-flash"
+  }
+}
+
 // https://docs.boundaryml.com/docs/snippets/clients/retry
 retry_policy Constant {
   max_retries 3

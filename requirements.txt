@@ -1,5 +1,7 @@
+python-dotenv
 baml-py
 pydantic
 owlready2
 rdflib
 pandas
+spacy

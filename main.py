@@ -1,5 +1,8 @@
-import dotenv
-dotenv.load_dotenv()
+from dotenv import load_dotenv
+load_dotenv()
+
+from ner import named_entity_recognition
+
 from baml_client.sync_client import b
 
 from baml_client.types import Triple
@@ -9,14 +12,9 @@ from pathlib import Path
 import rdflib
 import pandas as pd
 
-def generate_triples(text: str, ontology: str) -> list[Triple]:
-  # BAML's internal parser guarantees ExtractResume
-
-  # to be always return a Resume type
-
-  response = b.ExtractTriples(text, ontology)
-
-  return response
+def generate_triples(text: str, named_entities: list[str], ontology: str) -> list[Triple]:
+    named_entities_str = ", ".join(named_entities)
+    return b.ExtractTriples(text, named_entities_str, ontology)
 
 
 def add_triples(triples: list[Triple], graph: rdflib.Graph) -> None:
@@ -86,15 +84,18 @@ g = rdflib.Graph()
 # Get text
 file = Path("ontologies/pizza_ontology.owl")
 with open(file, "r") as f:
-  text = f.read()
+  ontology_text = f.read()
 
 
-g.parse(data=text, format="xml")
+g.parse(data=ontology_text, format="xml")
 
 print(f"Loaded {len(g)} triples from the ontology")
 print(g.serialize(format="turtle"))
 
-triples = generate_triples("Pepperoni pizza contains Cheese Pizza", text)
+source = "Pepperoni Pizza has pepperonni toppings and cheese and red sauce"
+named_entities = named_entity_recognition(source)
+
+triples = generate_triples(source, named_entities, ontology_text)
 add_triples(triples, g)
 
 # Write the XML to a file

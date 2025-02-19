@@ -1,7 +1,7 @@
 // Defining a raw unit of knowledge.
 class Triple {
   subjectIRI string // Should be as generic as possible
-  predicateIRI string
+  predicateIRI string 
   objectIRI string 
 }
 
@@ -11,6 +11,7 @@ function ExtractTriples(text: string, ontology_file: string) -> Triple[] {
 
   prompt #"
     Using this ontology, generate valid triples from the text.
+    Be sure to type all entities with the http://www.w3.org/1999/02/22-rdf-syntax-ns#type predicate.
     
     Ontology:
     {{ ontology_file }}

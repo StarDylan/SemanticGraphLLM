@@ -9,6 +9,9 @@ def check_consistency(ontology_rdf_file: Path, llm_generated_rdf_file: Path):
     my_world.get_ontology(str(ontology_rdf_file.absolute())).load()
     my_world.get_ontology(str(llm_generated_rdf_file.absolute())).load()
 
+    print(list(my_world.individuals()))
+    print(list(my_world.classes()))
+
     try:
         sync_reasoner_pellet(my_world, debug=2)
 
@@ -19,4 +22,4 @@ def check_consistency(ontology_rdf_file: Path, llm_generated_rdf_file: Path):
     return True, "KG is consistent with ontology"
 
 if __name__ == "__main__":
-    print(f"\n\n\n{check_consistency(Path('ontologies/pizza.example.rdf'), Path('ontologies/pizza_invalid.rdf'))[1]}")
+    print(f"\n\n\n{check_consistency(Path('ontologies/pizza_ontology.owl'), Path('output.n3'))[1]}")

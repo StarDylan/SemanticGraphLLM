@@ -1,117 +1,14 @@
-from json import load
-import json
 from dotenv import load_dotenv
-from numpy import tri
 
 load_dotenv()
 
-from ner import named_entity_recognition
-
-from baml_client.sync_client import b
-
-from baml_client.types import FaultyPrompt, Triple
-from verifier import check_consistency
+from baml_client.types import FaultyPrompt
 from pathlib import Path
 
-import rdflib
-import pandas as pd
-
-
-def generate_triples(
-    text: str, named_entities: list[str], ontology_text: str
-) -> list[Triple]:
-    named_entities_str = ", ".join(named_entities)
-    return b.ExtractTriples(text, named_entities_str, ontology_text)
-
-
-def retry_triples(
-    old_triples: list[Triple],
-    reasoner_failed_reason: str,
-    text: str,
-    named_entities: list[str],
-    ontology_text: str,
-) -> list[Triple] | FaultyPrompt:
-    triples_str = json.dumps([triple_to_dict(triple) for triple in old_triples], indent=2)
-    named_entities_str = ", ".join(named_entities)
-    return b.RetryTriples(
-        triples_str,
-        reasoner_failed_reason,
-        text,
-        named_entities_str,
-        ontology_text,
-    )
-
-
-def add_triples(triples: list[Triple], graph: rdflib.Graph) -> None:
-    for triple in triples:
-        # Resolve IRIs
-        subject = rdflib.URIRef(triple.subjectIRI)
-        predicate = rdflib.URIRef(triple.predicateIRI)
-        obj = rdflib.URIRef(triple.objectIRI)
-
-        graph.add((subject, predicate, obj))
-
-
-def triple_to_dict(triple: Triple) -> dict[str, str]:
-    return {
-        "subjectIRI": triple.subjectIRI,
-        "predicateIRI": triple.predicateIRI,
-        "objectIRI": triple.objectIRI,
-    }
-
-
-def get_label(node):
-    if isinstance(node, rdflib.URIRef):
-        uri = str(node)
-        if "#" in uri:
-            return uri.split("#")[-1]
-        else:
-            parts = uri.split("/")
-            return parts[-1] if parts[-1] else parts[-2]
-    elif isinstance(node, rdflib.Literal):
-        return str(node)
-    elif isinstance(node, rdflib.BNode):
-        return f"BlankNode_{node}"
-    else:
-        return str(node)
-
-
-def to_graph(graph: rdflib.Graph):
-    nodes = set()
-    edges = []
-
-    for s, p, o in graph:
-        # Process subject
-        s_id = str(s)
-        s_label = get_label(s)
-        nodes.add((s_id, s_label))
-
-        # Process object
-        o_id = str(o)
-        o_label = get_label(o)
-        nodes.add((o_id, o_label))
-
-        # Process predicate for edge label
-        p_label = get_label(p)
-        edges.append((s_id, o_id, p_label))
-
-    # Write nodes to CSV
-    nodes_df = pd.DataFrame(list(nodes), columns=["Id", "Label"])
-    nodes_df.to_csv("nodes.csv", index=False)
-
-    # Write edges to CSV
-    edges_df = pd.DataFrame(edges, columns=["Source", "Target", "Label"])
-    edges_df.to_csv("edges.csv", index=False)
-
-
-def load_ontology_into_graph() -> tuple[str, rdflib.Graph]:
-    g = rdflib.Graph()
-    # Get text
-    file = Path("ontologies/pizza_ontology.owl")
-    with open(file, "r") as f:
-        ontology_text = f.read()
-    g.parse(data=ontology_text, format="xml")
-    return ontology_text, g
+from ner import named_entity_recognition
+from verifier import check_consistency
+from baml_utils import generate_triples, retry_triples
+from graph_utils import load_ontology_into_graph, add_triples
 
 
 source = "Pepperoni Pizza has pepperonni toppings and cheese and red sauce. The 'MegaPizza' contains Cheese and Pepperoni Pizza as toppings"
@@ -144,4 +41,3 @@ while True:
     add_triples(triples, graph)
 
 print("Wrote output to output.xml")
-

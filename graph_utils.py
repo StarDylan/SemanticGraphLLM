@@ -30,7 +30,7 @@ def get_label(node):
         return str(node)
 
 
-def to_graph(graph: rdflib.Graph):
+def write_gephi_csv(graph: rdflib.Graph):
     nodes = set()
     edges = []
 

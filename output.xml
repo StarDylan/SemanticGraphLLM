@@ -3,37 +3,20 @@
    xmlns:owl="http://www.w3.org/2002/07/owl#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-   xmlns:untitled-ontology-2="http://www.semanticweb.org/dylan/ontologies/2025/1/untitled-ontology-2#"
 >
+  <rdf:Description rdf:about="http://www.semanticweb.org/dylan/ontologies/2025/1/untitled-ontology-2">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/dylan/ontologies/2025/1/untitled-ontology-2#hasTopping">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
     <rdfs:domain rdf:resource="http://www.semanticweb.org/dylan/ontologies/2025/1/untitled-ontology-2#Pizza"/>
     <rdfs:range rdf:resource="http://www.semanticweb.org/dylan/ontologies/2025/1/untitled-ontology-2#Ingredient"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.semanticweb.org/dylan/ontologies/2025/1/untitled-ontology-2#MegaPizza">
-    <untitled-ontology-2:hasTopping rdf:resource="http://www.semanticweb.org/dylan/ontologies/2025/1/untitled-ontology-2#Cheese"/>
-    <untitled-ontology-2:hasTopping rdf:resource="http://www.semanticweb.org/dylan/ontologies/2025/1/untitled-ontology-2#PepperoniPizza"/>
-    <rdf:type rdf:resource="http://www.semanticweb.org/dylan/ontologies/2025/1/untitled-ontology-2#Pizza"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/dylan/ontologies/2025/1/untitled-ontology-2#Ingredient">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <owl:disjointWith rdf:resource="http://www.semanticweb.org/dylan/ontologies/2025/1/untitled-ontology-2#Pizza"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.semanticweb.org/dylan/ontologies/2025/1/untitled-ontology-2#PepperoniPizza">
-    <untitled-ontology-2:hasTopping rdf:resource="http://www.semanticweb.org/dylan/ontologies/2025/1/untitled-ontology-2#Pepperoni"/>
-    <untitled-ontology-2:hasTopping rdf:resource="http://www.semanticweb.org/dylan/ontologies/2025/1/untitled-ontology-2#Cheese"/>
-    <rdf:type rdf:resource="http://www.semanticweb.org/dylan/ontologies/2025/1/untitled-ontology-2#Pizza"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://www.semanticweb.org/dylan/ontologies/2025/1/untitled-ontology-2#Pizza">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.semanticweb.org/dylan/ontologies/2025/1/untitled-ontology-2#Pepperoni">
-    <rdf:type rdf:resource="http://www.semanticweb.org/dylan/ontologies/2025/1/untitled-ontology-2#Ingredient"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.semanticweb.org/dylan/ontologies/2025/1/untitled-ontology-2#Cheese">
-    <rdf:type rdf:resource="http://www.semanticweb.org/dylan/ontologies/2025/1/untitled-ontology-2#Ingredient"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.semanticweb.org/dylan/ontologies/2025/1/untitled-ontology-2">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
   </rdf:Description>
 </rdf:RDF>

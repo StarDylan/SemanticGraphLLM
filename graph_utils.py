@@ -58,11 +58,10 @@ def to_graph(graph: rdflib.Graph):
     edges_df.to_csv("edges.csv", index=False)
 
 
-def load_ontology_into_graph() -> tuple[str, rdflib.Graph]:
+def load_ontology_into_graph(ontology: str) -> tuple[str, rdflib.Graph]:
     g = rdflib.Graph()
     # Get text
-    file = Path("ontologies/pizza_ontology.owl")
-    with open(file, "r") as f:
+    with open(ontology, "r") as f:
         ontology_text = f.read()
     g.parse(data=ontology_text, format="xml")
     return ontology_text, g

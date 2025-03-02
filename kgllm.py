@@ -13,7 +13,6 @@ def generate_knowledge_graph(
     filename: str,
     ontology: str,
     outfile: str,
-    gephi: bool = False,
     verbose: bool = False,
 ) -> None:
     from ner import named_entity_recognition
@@ -50,8 +49,7 @@ def generate_knowledge_graph(
 
         with open(outfile, "w") as f:
             f.write(graph.serialize(format="xml"))
-        if gephi:
-            write_gephi_csv(graph)
+        write_gephi_csv(graph)
         success, message = check_consistency(Path(ontology), Path(outfile))
         if success:
             break

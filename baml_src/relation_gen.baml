@@ -19,6 +19,7 @@ Follow these requirements:
       1) Using the given ontology.
       2) Referencing the entity list as hints. 
       3) Do not use the entity list as the only source of truth, be sure to reference the original text for the source of truth.
+      4) When you are done, be sure the last entity is the triple {subjectIRI: "[[DONE]]" predicateIRI: "[[DONE]]" objectIRI: "[[DONE]]"}
 
 Be sure to type all entities with the http://www.w3.org/1999/02/22-rdf-syntax-ns#type predicate.
 
@@ -26,7 +27,7 @@ Be sure that all generated entities are within the base IRI of the ontology.
 "#
 
 // Create a function to extract triples from text.
-function ExtractTriples(text: string, named_entities: string, ontology_text: string) -> Triple[] {
+function ExtractTriples(text: string, named_entities: string, ontology_text: string, previous_triples: Triple[]) -> Triple[] {
   client Gemini
 
   prompt #"
@@ -44,6 +45,14 @@ function ExtractTriples(text: string, named_entities: string, ontology_text: str
     {{ text }}
 
     {{ ctx.output_format }}
+
+    {% if previous_triples %}
+      Here are the triples you generated before, do not repeat them, instead build on them:
+      {% for triple in previous_triples %}
+        {{ triple.subjectIRI }} {{ triple.predicateIRI }} {{ triple.objectIRI }}
+      {% endfor %}
+    {% endif %}
+
   "#
 }
 

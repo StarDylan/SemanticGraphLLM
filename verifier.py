@@ -15,7 +15,7 @@ def check_consistency(ontology_rdf_file: Path, llm_generated_rdf_file: Path, ver
         print(list(my_world.classes()))
 
     try:
-        sync_reasoner_pellet(my_world, debug=2 if verbose else 0)
+        sync_reasoner_pellet(my_world, debug=2)
 
     except OwlReadyInconsistentOntologyError as e:
         

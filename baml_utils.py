@@ -14,7 +14,19 @@ def generate_triples(
     text: str, named_entities: list[str], ontology_text: str
 ) -> list[Triple]:
     named_entities_str = ", ".join(named_entities)
-    return b.ExtractTriples(text, named_entities_str, ontology_text)
+
+    result = b.ExtractTriples(text, named_entities_str, ontology_text, [])
+    last = result[-1]
+    if "[[DONE]]" in last.subjectIRI.upper():
+        return result[:-1]
+    else:
+        while True:
+            print("Last triple wasn't DONE, extending the triple set...")
+            next_result = b.ExtractTriples(text, named_entities_str, ontology_text, result)
+            result.extend(next_result)
+            last = result[-1]
+            if "[[DONE]]" in last.subjectIRI.upper():
+                return result[:-1]
 
 
 def retry_triples(

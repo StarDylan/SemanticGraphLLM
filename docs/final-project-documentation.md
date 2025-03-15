@@ -235,5 +235,7 @@ If pursed, these avenues could create a system better able to capture facts and 
 # References
 
 [1] “How to construct knowledge graphs.” https://python.langchain.com/docs/how_to/graph_constructing/.
+
 [2] Y. Zhu et al., “LLMS for knowledge graph construction and reasoning: Recent capabilities and future opportunities,” World Wide Web, vol. 27, no. 5, Aug. 2024. doi:10.1007/s11280-024-01297-w
+
 [3] H. Ye, N. Zhang, H. Chen, and H. Chen, “Generative Knowledge Graph Construction: A Review,” Proceedings of the 2022 Conference on Empirical Methods in Natural Language Processing, Dec. 2022. doi:10.18653/v1/2022.emnlp-main.1

@@ -143,7 +143,7 @@ The system we’ve built is a cli application that can be found in kgllm.py. Whe
 - KG consistency
 ## Tools
 
-The parentheses specify what tools make up what components in our [System Design](https://github.com/StarDylan/SemanticGraphLLM/blob/main/docs/system-design.md
+The parentheses specify what tools make up what components in our [System Design](https://github.com/StarDylan/SemanticGraphLLM/blob/main/docs/system-design.md)
 
 - Entity Recognition (Named Entity Recognition)
 	- spaCy (en_core_web_lg)

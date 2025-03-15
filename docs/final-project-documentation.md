@@ -205,7 +205,7 @@ Note that although it generated successfully (and omitted adding pepperoni pizza
 
 # Evaluation on Requirements
 
-Being a system that operates heavily in the realm of ephemeral concepts such as capturing all facts of a text, our system is naturally difficult to evaluate. With that said, we evaluated our program on the [markdown file here](data\big-pizza.md) and the [ontology here](ontologies\pizza_ontology.owl). This was a large dataset that very much stressed our system past its limits.
+Being a system that operates heavily in the realm of ephemeral concepts such as capturing all facts of a text, our system is naturally difficult to evaluate. With that said, we evaluated our program on the [markdown file here](https://github.com/StarDylan/SemanticGraphLLM/blob/main/data/big-pizza.md) and the [ontology here](https://github.com/StarDylan/SemanticGraphLLM/blob/main/ontologies/pizza_ontology.owl). This was a large dataset that very much stressed our system past its limits.
 
 ## Requirement Fulfillment and Caveats
 
